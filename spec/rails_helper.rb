@@ -6,14 +6,14 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/dsl'
 require 'capybara/poltergeist'
+include Warden::Test::Helpers
 Capybara.javascript_driver = :poltergeist
-
+require 'support/shared_db_connection'
 require 'support/factory_bot'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   config.use_transactional_fixtures = false
 
   config.infer_spec_type_from_file_location!
@@ -59,5 +59,9 @@ RSpec.configure do |config|
 
   config.append_after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.after :each do
+    Warden.test_reset!
   end
 end
