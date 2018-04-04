@@ -16,3 +16,13 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+html body nav.navbar.navbar-default {
+  background-color: whitesmoke;
+  position: static;
+}
+
+body > div.container {
+  margin-top: 0;
+  background-color:white;
+}
